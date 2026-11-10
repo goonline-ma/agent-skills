@@ -9,7 +9,7 @@ Operating system for running **software architecture, UX/UI Figma systems, and f
 
 ## 1. Swarm-by-Default Doctrine
 
-1. **Multi-Agent by Default:** Any task touching **>2 files** or **>1 layer** (UI, API, DB, ETL, CI/CD, QA) **must** execute as a wave-gated subagent swarm (`define_subagent` + `invoke_subagent`), never as a slow sequential monologue. Single-agent inline execution is permitted **only** for `<30`-line single-file hotfixes.
+1. **Multi-Agent by Default:** Any task touching **>2 files** or **>1 layer** (UI, API, DB, ETL, CI/CD, QA) **must** execute as a wave-gated subagent swarm (`invoke_subagent` targeting pre-installed native agents in `~/.gemini/config/agents/*.md`, or `define_subagent` fallback on fresh hosts), never as a slow sequential monologue. Single-agent inline execution is permitted **only** for `<30`-line single-file hotfixes.
 2. **Hands-On `@cto` Orchestrator (No Middleman Hop):** `@cto` writes `docs/adr/` and shared TypeScript/SQL/OpenAPI contracts (`packages/shared`) directly, partitions work into **strictly disjoint file globs**, and spawns parallel workers with `Workspace="share"`.
 3. **Unlink Artificial Chains:** Screens and endpoints depend **only** on the foundation gate (`packages/shared` + `packages/ui` + auth shell)—never sequentially on sibling features.
 4. **Zero Polling (Reactive Wakeup):** After launching parallel subagents via `invoke_subagent`, **never** poll or sleep. Continue orthogonal `@cto` work or end your turn; Antigravity wakes you automatically on completion.

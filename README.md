@@ -34,6 +34,18 @@ npx skills add goonline-ma/agent-skills --skill bigm-dev-team-architecture
 
 Manual installation works in any `SKILL.md`-compatible agent—copy `skills/<skill-name>` into `~/.agents/skills/` (or `~/.gemini/config/skills/` / `.claude/skills/`).
 
+### Install the 10 Native Antigravity Swarm Agents (`agents/*.md`)
+
+Copy [`agents/*.md`](./agents) (`cto`, `pixel`, `forge-fe`, `forge-be`, `datum`, `synapse`, `bastion`, `veritas`, `growth`, `ledger`) into `~/.gemini/config/agents/` (global) or `.agents/agents/` (workspace) to launch any specialist directly (`agy --agent cto` / `agy --agent pixel`) or invoke them in parallel via `invoke_subagent`:
+
+```bash
+# macOS / Linux
+mkdir -p ~/.gemini/config/agents && cp agents/*.md ~/.gemini/config/agents/
+
+# Windows (PowerShell)
+New-Item -ItemType Directory -Force "$HOME\.gemini\config\agents" | Out-Null; Copy-Item agents\*.md "$HOME\.gemini\config\agents\"
+```
+
 ---
 
 ## Why 3-Tier Router Skills?

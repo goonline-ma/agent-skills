@@ -1,6 +1,6 @@
-# 02 — Canonical Subagent Definitions (`define_subagent` Specs)
+# 02 — Native Antigravity Agents & Fallback `define_subagent` Specs
 
-Define only the specialists required for the current build at Wave 0, then spawn parallel instances via `invoke_subagent` (each call gets a unique `conversationId` even when sharing a `TypeName`, e.g., three concurrent `forge-fe` workers on disjoint feature folders).
+All 10 swarm agents (`cto`, `pixel`, `forge-fe`, `forge-be`, `datum`, `synapse`, `bastion`, `veritas`, `growth`, `ledger`) are installed natively in `~/.gemini/config/agents/*.md` (discoverable via `agy agents` and `<subagents>`). **Invoke them directly with `invoke_subagent(TypeName="<name>", Workspace="share")`**—use the `define_subagent` JSONs below **only** as a fallback on a machine where `~/.gemini/config/agents/` has not been copied yet.
 
 ## Standard Worker Prompt Contract (Include in Every `invoke_subagent` `Prompt`)
 Every `invoke_subagent` prompt dispatched by `@cto` must specify 5 fields:
