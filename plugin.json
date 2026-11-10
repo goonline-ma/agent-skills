@@ -1,0 +1,18 @@
+{
+  "name": "goonline-agent-skills",
+  "displayName": "GoOnline Agent Skills & Swarm Team",
+  "version": "1.0.0",
+  "description": "Ultra-low-token digital growth skills (growth-strategy, bigm-dev-team-architecture) and 10 native multi-agent engineering specialists (cto, pixel, forge-fe, forge-be, datum, synapse, bastion, veritas, growth, ledger) built by GoOnline.ma.",
+  "logo": "assets/logo.svg",
+  "author": {
+    "name": "GoOnline.ma (Big M Solutions)",
+    "url": "https://goonline.ma"
+  },
+  "homepage": "https://goonline.ma",
+  "repository": "https://github.com/goonline-ma/agent-skills",
+  "suggestedPrompts": [
+    "Act as @cto and plan a collision-free multi-agent build from docs/SCOPE.md",
+    "Have @pixel extract tokens and components from our Figma design into DESIGN.md",
+    "Run growth-strategy to build a 90-day GTM, SEO/GEO plan, and executive pitch deck"
+  ]
+}
