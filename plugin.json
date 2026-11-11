@@ -1,7 +1,7 @@
 {
   "name": "goonline-agent-skills",
   "displayName": "GoOnline Agent Skills & Swarm Team",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ultra-low-token digital growth skills (growth-strategy, bigm-dev-team-architecture) and 10 native multi-agent engineering specialists (cto, pixel, forge-fe, forge-be, datum, synapse, bastion, veritas, growth, ledger) built by GoOnline.ma.",
   "logo": "assets/logo.svg",
   "author": {

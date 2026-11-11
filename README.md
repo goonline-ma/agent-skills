@@ -14,7 +14,7 @@ Built and battle-tested in live client delivery by **[GoOnline.ma](https://goonl
 
 **Compatible with:** Google Antigravity · Claude Code · Cursor · Hermes Agent · Codex · Windsurf
 
-[Quick Install](#quick-install) · [Skills Catalog](#skills-catalog) · [Swarm Agents Catalog](#swarm-agents-catalog) · [4-Wave Swarm Flow](#how-the-4-wave-swarm-runs) · [Work With GoOnline.ma](#work-with-goonlinema)
+[Interactive Install](#quick-install) · [Usage Guide](#usage-instructions) · [Skills Catalog](#skills-catalog) · [Swarm Agents Catalog](#swarm-agents-catalog) · [4-Wave Swarm Flow](#how-the-4-wave-swarm-runs) · [Work With GoOnline.ma](#work-with-goonlinema)
 
 </div>
 
@@ -22,41 +22,54 @@ Built and battle-tested in live client delivery by **[GoOnline.ma](https://goonl
 
 ## Quick Install
 
-Choose the installation mode that matches your agent environment:
+Keep your context window lean by installing **only** the skills and agents your workflow needs. Full agent-executable specification: **[`INSTALL.md`](./INSTALL.md)**.
 
-### Option A — Full Antigravity Plugin Bundle (Skills + All 10 Swarm Agents)
+### Option A — Interactive Multi-Step Install Inside Your AI Harness *(Recommended)*
 
-Installs both master skills (`growth-strategy`, `bigm-dev-team-architecture`) and all 10 native swarm agents (`cto`, `pixel`, `forge-fe`, `forge-be`, `datum`, `synapse`, `bastion`, `veritas`, `growth`, `ledger`) as a single toggleable unit:
+Paste this single prompt into **Google Antigravity**, **Claude Code**, **Hermes Agent**, **Cursor**, **Codex**, or **Windsurf**:
+
+```text
+Read https://raw.githubusercontent.com/goonline-ma/agent-skills/main/INSTALL.md and walk me through installing only the GoOnline skills and agents I need.
+```
+
+**What your harness does automatically:**
+1. Auto-detects installed environments (`antigravity`, `claude-code`, `hermes` profiles, `.agents/`) via `scripts/install.py --detect --json`.
+2. Prompts you with **multi-step native questions** (`ask_question` in Antigravity, `AskUserQuestion` in Claude Code, `clarify` in Hermes) to pick your **target harness(es)**, **scope** (`global` vs. `workspace`), and **role preset or exact individual skills & agents** (displaying per-item token costs).
+3. Adapts frontmatter per harness automatically (native Antigravity `commandExecutionPolicy`, Anthropic `.claude/agents/` model mapping, and `<= 60`-char validated descriptions for Hermes) and prints a verified token-footprint receipt.
+
+### Option B — Interactive Terminal Wizard or Selective CLI (`scripts/install.py`)
+
+Prefer an interactive terminal menu—or repeatable CI/team flags? Zero external `pip` packages required (Python 3.9+ stdlib):
+
+```bash
+git clone https://github.com/goonline-ma/agent-skills.git
+cd agent-skills
+
+# Launch the 4-step interactive terminal wizard
+python scripts/install.py
+
+# Or install a preset / exact modules directly across one or multiple harnesses
+python scripts/install.py --harness antigravity,claude-code --scope global --preset marketing
+python scripts/install.py --harness antigravity --scope workspace --skills bigm-dev-team-architecture --agents cto,pixel,forge-fe,veritas
+python scripts/install.py --harness hermes --hermes-profile growth --skills growth-strategy --agents growth,ledger
+```
+
+### Option C — Full Antigravity Plugin Bundle (1-Command All-In)
+
+Installs all skills and all 10 swarm agents together as a single toggleable Antigravity plugin:
 
 ```bash
 git clone https://github.com/goonline-ma/agent-skills.git
 agy plugin install ./agent-skills
 ```
 
-### Option B — Skills CLI (`npx skills` for Claude Code, Antigravity, Cursor, Hermes, Codex)
+### Option D — Skills CLI (`npx skills`)
 
 ```bash
-# Install all GoOnline skills globally
+# Interactive skill picker (or add --skill <name> to target one)
 npx skills add goonline-ma/agent-skills
-
-# Or install an individual skill
 npx skills add goonline-ma/agent-skills --skill growth-strategy
 npx skills add goonline-ma/agent-skills --skill bigm-dev-team-architecture
-```
-
-### Option C — Standalone Swarm Agents (`agents/*.md`)
-
-Copy [`agents/*.md`](./agents) into `~/.gemini/config/agents/` (global Antigravity), `.agents/agents/` (project-scoped VCS), or `.claude/agents/` (Claude Code):
-
-```bash
-# macOS / Linux
-git clone https://github.com/goonline-ma/agent-skills.git
-mkdir -p ~/.gemini/config/agents && cp agent-skills/agents/*.md ~/.gemini/config/agents/
-
-# Windows (PowerShell)
-git clone https://github.com/goonline-ma/agent-skills.git
-New-Item -ItemType Directory -Force "$HOME\.gemini\config\agents" | Out-Null
-Copy-Item .\agent-skills\agents\*.md "$HOME\.gemini\config\agents\"
 ```
 
 ---
@@ -171,6 +184,35 @@ flowchart TD
 
     QA -->|"VERDICT: PASS"| SHIP["@bastion Cloudflare Deploy (120s Rollback Gate)<br/>+ @growth / @ledger Launch GTM & Margin Audit"]
 ```
+
+---
+
+## Usage Instructions
+
+Full recipes, harness mappings, and CLI flags live in **[`USAGE.md`](./USAGE.md)**.
+
+### 1. Invoke by Harness
+
+| Harness | Use a Skill | Run a Specialist Agent |
+| :--- | :--- | :--- |
+| **Google Antigravity** | Automatic by prompt intent (or `use growth-strategy`) | `agy --agent cto` / `agy --agent pixel`, or delegate in chat (`@cto`, `@pixel`, `@veritas`) |
+| **Claude Code** | `/growth-strategy` or `/bigm-dev-team-architecture` | `claude --agent cto` or ask Claude to delegate to `pixel`, `forge-fe`, `veritas` |
+| **Hermes Agent** | `hermes -p <profile> --skill growth-strategy` | `hermes -p coo` / `hermes -p growth` |
+| **Cursor / Codex** | Reference `@growth-strategy` or ask naturally | Reference `@.agents/agents/cto.md` or `@.agents/agents/pixel.md` |
+
+### 2. High-Impact Starter Prompts
+
+- **Run a Multi-Agent Product Build (`@cto` Swarm):**
+  > `Use bigm-dev-team-architecture as @cto. Read docs/SCOPE.md, lock Wave 0 ADRs and packages/shared contracts, spawn @pixel for DESIGN.md + packages/ui and @bastion for CI, pass Wave 1 with @veritas, then fan out Wave 2 features in parallel across @forge-fe, @forge-be, and @datum.`
+- **Turn a Figma Design into Production Code (`@pixel` → `@forge-fe` → `@veritas`):**
+  > `@pixel Extract design tokens, auto-layout specs, and Code Connect mappings from https://www.figma.com/design/<fileKey>/<name>?node-id=12-34 into DESIGN.md and packages/ui, have @forge-fe implement all 5 UI states, and have @veritas audit parity at 375px, 1440px, and RTL.`
+- **Launch Digital Strategy, SEO/GEO & Cited Prospect Dossiers (`growth-strategy` + `@growth`):**
+  > `Use growth-strategy to audit https://example.com for Google SEO and ChatGPT/Perplexity GEO citability, build our 90-day GTM funnel targets with growth_calc.py, and draft a cited 1-page prospect dossier tracked in citation_ledger.py.`
+- **Manage Installed Modules Anytime:**
+  ```bash
+  python scripts/install.py --list-installed
+  python scripts/install.py --uninstall --harness antigravity --scope global --agents datum,synapse
+  ```
 
 ---
 
